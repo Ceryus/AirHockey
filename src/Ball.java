@@ -5,6 +5,7 @@
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.WindowStateListener;
 
 public class Ball extends Block
 {
@@ -27,14 +28,16 @@ public class Ball extends Block
 	{
 		setX(x);setY(y);setWidth(w);setHeight(h);
 	}
-	public Ball(int x, int y, int w, int h, Color col)
+	public Ball(int x, int y, int w, int h, Color c)
 	{
-		setX(x);setY(y);setWidth(w);setHeight(h);setColor(col);
+		setX(x);setY(y);setWidth(w);setHeight(h);setColor(c);
 	}
-	public Ball(int x, int y, int w, int h, Color col, int xS, int yS)
+	public Ball(int x, int y, int w, int h, Color c, int xS, int yS)
 	{
-		setX(x);setY(y);setWidth(w);setHeight(h);setColor(col);
+		setX(x);setY(y);setWidth(w);setHeight(h);setColor(c);
 	}
+	
+	
 	
 	
 	
@@ -46,35 +49,32 @@ public class Ball extends Block
 	
 	   
    //add the set methods
+   public void setXSpeed(int xS)
+   {
+	   xSpeed = xS;
+   }
+   public void setYSpeed(int yS)
+   {
+	   ySpeed = yS;
+   }
+   public int getXSpeed()
+   {
+	   return xSpeed;
+   }
+   public int getYSpeed()
+   {
+	   return ySpeed;
+   }
    
-	public void setXSpeed(int xS)
-	{
-		xSpeed = xS;
-	}
-	public void setYSpeed(int yS)
-	{
-		ySpeed = yS;
-	}
-	public int getXSpeed()
-	{
-		return xSpeed;
-	}
-	public int getYSpeed()
-	{
-		return ySpeed;
-	}
-
    public void moveAndDraw(Graphics window)
    {
    	//draw a white ball at old ball location
-	   window.setColor(Color.white);
-	   window.fillRect(getX(), getY(), getWidth(), getHeight());
-	   window.setColor(this.getColor());
-
+	  window.setColor(Color.white);
+	  window.fillRect(getX(), getY(), getWidth(), getHeight());
+	  window.setColor(this.getColor());
       setX(getX()+xSpeed);
       setY(getY()+ySpeed);
       window.fillRect(getX(), getY(), getWidth(), getHeight());
-		//setY
 
 		//draw the ball at its new location
    }
@@ -82,7 +82,7 @@ public class Ball extends Block
 	public boolean equals(Object obj)
 	{
 		Ball ball = (Ball) obj;
-		if(ball.getWidth() == this.getWidth() && ball.getHeight() == this.getHeight() && ball.getColor().equals(this.getColor()))
+		if(ball.getWidth() == this.getWidth() && ball.getHeight() == this.getHeight() && ball.getColor().equals(this.getColor()) && ball.getXSpeed() == this.getXSpeed() && ball.getYSpeed() == this.getYSpeed())
 		{
 			return true;
 		}
@@ -90,7 +90,6 @@ public class Ball extends Block
 	}   
 
    //add the get methods
-
 	public String toString()
 	{
 		return "X:"+getX()+" Y:"+getY()+" W:"+getWidth()+" H:"+getHeight()+" C:"+getColor();
